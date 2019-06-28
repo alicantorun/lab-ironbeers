@@ -27,4 +27,17 @@ app.get("/beers", (req, res) => {
     });
 });
 
+app.get("/random-beer", (req, res) => {
+  punkAPI
+    .getRandom()
+    .then(beers => {
+      let rNum = Math.floor(Math.random() * 25) + 1;
+      res.render("beers", { beers });
+      console.log(beers[rNum]);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+
 app.listen(3000, () => console.log("server has started"));
